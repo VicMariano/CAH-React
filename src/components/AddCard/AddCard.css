@@ -1,0 +1,39 @@
+@import url("../../App.css");
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+}
+
+.label {
+  align-self: flex-start;
+  justify-self: start;
+  justify-items: start;
+  padding: 0.5em 0.5em 0.5em 0;
+  margin: 0.5em 0.5em 0.5em 0;
+}
+
+textarea {
+  min-height: 10em;
+}
+
+.card-creator {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+  height: 300px;
+  width: 180px;
+  border-radius: 0.5rem;
+  box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.plus {
+  margin: 0 1em;
+  font-size: large;
+}

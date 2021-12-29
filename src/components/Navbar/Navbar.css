@@ -1,0 +1,32 @@
+.navbar {
+  background: #000;
+  height: 4em;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  z-index: 10;
+  /* Third Nav */
+  /* justify-content: flex-start; */
+}
+
+.nav-btn {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
+.nav-btn:active {
+  color: #15cdfc;
+}
+.nav-btn:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}

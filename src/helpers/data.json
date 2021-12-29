@@ -1,0 +1,89 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
+      "cardType": "black"
+    },
+    {
+      "id": 2,
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
+      "cardType": "white"
+    },
+    {
+      "id": 3,
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
+      "cardType": "black"
+    },
+    {
+      "id": 4,
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
+      "cardType": "white"
+    },
+    {
+      "id": 5,
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
+      "cardType": "white"
+    },
+    {
+      "text": "Card agregada con botón",
+      "cardType": "white",
+      "id": 6
+    },
+    {
+      "text": "Card agregada con botón",
+      "cardType": "white",
+      "id": 7
+    },
+    {
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
+      "cardType": "white",
+      "id": 8
+    },
+    {
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
+      "cardType": "white",
+      "id": 9
+    },
+    {
+      "text": "Alta carta me voy a escribir",
+      "cardType": "white",
+      "id": 10
+    },
+    {
+      "text": "iaodfpaiwufepoiauwp dcadef afrcawe cf awedawed wq ",
+      "cardType": "white",
+      "id": 11
+    },
+    {
+      "text": "carta carta agreegada",
+      "cardType": "white",
+      "id": 12
+    },
+    {
+      "text": "idces dcaefc aw ffc awcaer e ",
+      "cardType": "white",
+      "id": 13
+    },
+    {
+      "text": "probando el padre atafreado crando card",
+      "cardType": "white",
+      "id": 14
+    },
+    {
+      "text": "card con onsubmit=>fetch",
+      "cardType": "white",
+      "id": 15
+    },
+    {
+      "text": "",
+      "cardType": "white",
+      "id": 16
+    },
+    {
+      "text": "Esta es una carta creada con textarea",
+      "cardType": "white",
+      "id": 17
+    }
+  ]
+}
