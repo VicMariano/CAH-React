@@ -1,26 +1,28 @@
 .white-card {
-    color: black;
-    background-color: white;
-    height: 12em;
-    width: 8em;
-    border-radius: 0.5rem;
-    box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
-    padding: 1em;
-    margin: 0.5em;
+  color: black;
+  background-color: white;
+  height: 12em;
+  width: 8em;
+  min-width: 8em;
+  border-radius: 0.5rem;
+  box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
+  padding: 1em;
+  margin: 0.5em;
 }
 
 .black-card {
-    color: white;
-    background-color: black;
-    height: 12em;
-    width: 8em;
-    border-radius: 0.5rem;
-    box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
-    padding: 1em;
-    margin: 0.5em;
+  color: white;
+  background-color: black;
+  height: 12em;
+  width: 8em;
+  min-width: 8em;
+  border-radius: 0.5rem;
+  box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
+  padding: 1em;
+  margin: 0.5em;
 }
 
 .card-text {
-    text-align: left;
-    font-size: medium;
+  text-align: left;
+  font-size: medium;
 }
