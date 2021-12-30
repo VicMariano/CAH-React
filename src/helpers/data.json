@@ -1,89 +1,110 @@
 {
-  "cards": [
+  "whiteCards": [
     {
-      "id": 1,
       "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "black"
+      "cardType": "white",
+      "id": 1
     },
     {
-      "id": 2,
       "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white"
+      "cardType": "white",
+      "id": 2
     },
     {
-      "id": 3,
       "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "black"
-    },
-    {
-      "id": 4,
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white"
-    },
-    {
-      "id": 5,
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white"
+      "cardType": "white",
+      "id": 3
     },
     {
       "text": "Card agregada con botón",
+      "cardType": "white",
+      "id": 4
+    },
+    {
+      "text": "Card agregada con botón",
+      "cardType": "white",
+      "id": 5
+    },
+    {
+      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
       "cardType": "white",
       "id": 6
     },
     {
-      "text": "Card agregada con botón",
+      "text": "Reee graciosa, no te lo podes creer omai",
       "cardType": "white",
       "id": 7
     },
     {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
+      "text": "Nueva carta agregada __________",
       "cardType": "white",
       "id": 8
     },
     {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
+      "text": 444,
       "cardType": "white",
       "id": 9
     },
     {
-      "text": "Alta carta me voy a escribir",
       "cardType": "white",
       "id": 10
     },
     {
-      "text": "iaodfpaiwufepoiauwp dcadef afrcawe cf awedawed wq ",
+      "text": "",
       "cardType": "white",
       "id": 11
     },
     {
-      "text": "carta carta agreegada",
+      "text": "k",
       "cardType": "white",
       "id": 12
     },
     {
-      "text": "idces dcaefc aw ffc awcaer e ",
+      "text": "La comida que sobró de ayer",
       "cardType": "white",
       "id": 13
     },
     {
-      "text": "probando el padre atafreado crando card",
+      "text": "",
       "cardType": "white",
       "id": 14
     },
     {
-      "text": "card con onsubmit=>fetch",
+      "text": "wwww",
       "cardType": "white",
       "id": 15
     },
     {
-      "text": "",
+      "text": "El mínimo indispensable de coherencia",
       "cardType": "white",
       "id": 16
+    }
+  ],
+  "blackCards": [
+    {
+      "id": 1,
+      "text": "La Casa Rosada está llena de __________ y por eso el país está cómo está",
+      "cardType": "black"
     },
     {
-      "text": "Esta es una carta creada con textarea",
-      "cardType": "white",
-      "id": 17
+      "id": 2,
+      "text": "Nunca crei que vivir sin __________ sería tan dificil",
+      "cardType": "black"
+    },
+    {
+      "id": 3,
+      "text": "¡Nada mejor que un poco de __________ cada mañana para arrancar bien el día!",
+      "cardType": "black"
+    },
+    {
+      "id": 4,
+      "text": "Ojalá __________ hubiese intervenido en el desarrollo de ésta app",
+      "cardType": "black"
+    },
+    {
+      "id": 5,
+      "text": "Ojalá __________ hubiese patrocinado __________",
+      "cardType": "black"
     }
   ]
 }
