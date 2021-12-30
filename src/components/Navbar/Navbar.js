@@ -9,9 +9,9 @@ export default function Navbar() {
       <Nav className="navbar">
         <NavLink to="/"> CAH</NavLink>
         <div className="nav-menu">
-          <NavLink to="/play">Play</NavLink>
+          <NavLink to="/playPage">Play</NavLink>
           <NavLink to="/addCardPage">Add Card</NavLink>
-          <NavLink to="/collection">Collection</NavLink>
+          <NavLink to="/collectionPage">Collection</NavLink>
         </div>
       </Nav>
     </>
