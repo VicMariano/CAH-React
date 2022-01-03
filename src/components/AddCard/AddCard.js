@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./AddCard.css";
 import { addCard } from "../../services/api";
+import { addWhiteCardFS } from "../../services/firebaseService";
 
 export default function AddCard() {
-  const [form, setForm] = useState({ text: "", cardType: "white" });
+  const [form, setForm] = useState({ text: "", cardType: "white", id: 3 });
   const [submitSucces, setSubmitSucces] = useState(null);
   const handleChange = (e) => {
     setForm({ ...form, text: e.target.value });
@@ -11,13 +12,14 @@ export default function AddCard() {
 
   const submitCard = async (e) => {
     e.preventDefault();
+    addWhiteCardFS(form);
     try {
       const postResponse = await addCard({
         text: form.text,
         cardType: "white",
       });
       setSubmitSucces(true);
-      console.log("Card Added Correctly", postResponse);
+      console.log("Card Added Correctly to the json", postResponse);
     } catch (err) {
       setSubmitSucces(false);
       console.log(Object.keys(err), err.message, err.response);
