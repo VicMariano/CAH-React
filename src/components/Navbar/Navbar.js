@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Navbar.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Nav, NavLink } from "./NavbarElements";
 
 export default function Navbar() {
@@ -9,9 +8,9 @@ export default function Navbar() {
       <Nav className="navbar">
         <NavLink to="/"> CAH</NavLink>
         <div className="nav-menu">
-          <NavLink to="/playPage">Play</NavLink>
-          <NavLink to="/addCardPage">Add Card</NavLink>
-          <NavLink to="/collectionPage">Collection</NavLink>
+          <NavLink to="/playPage">Juego</NavLink>
+          <NavLink to="/addCardPage">Agregar carta</NavLink>
+          <NavLink to="/collectionPage">Colección</NavLink>
         </div>
       </Nav>
     </>
