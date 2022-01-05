@@ -1,83 +1,34 @@
 {
   "whiteCards": [
     {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white",
-      "id": 1
-    },
-    {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white",
-      "id": 2
-    },
-    {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente",
-      "cardType": "white",
-      "id": 3
-    },
-    {
-      "text": "Card agregada con botón",
+      "text": "La comida que sobró de ayer",
       "cardType": "white",
       "id": 4
     },
     {
-      "text": "Card agregada con botón",
+      "text": "El mínimo indispensable de coherencia",
       "cardType": "white",
       "id": 5
     },
     {
-      "text": "El texto dentro de la card puede ser de 1 renglon a 6 renglones, aproximadamente y mucho mucho mas texto",
+      "text": "Carta nuevaaa prueba uno",
       "cardType": "white",
       "id": 6
     },
     {
-      "text": "Reee graciosa, no te lo podes creer omai",
+      "text": "Typescript",
       "cardType": "white",
       "id": 7
     },
     {
-      "text": "Nueva carta agregada __________",
+      "text": "Nueva cartita",
       "cardType": "white",
       "id": 8
     },
     {
-      "text": 444,
+      "text": "Nueva carta",
       "cardType": "white",
       "id": 9
-    },
-    {
-      "cardType": "white",
-      "id": 10
-    },
-    {
-      "text": "",
-      "cardType": "white",
-      "id": 11
-    },
-    {
-      "text": "k",
-      "cardType": "white",
-      "id": 12
-    },
-    {
-      "text": "La comida que sobró de ayer",
-      "cardType": "white",
-      "id": 13
-    },
-    {
-      "text": "",
-      "cardType": "white",
-      "id": 14
-    },
-    {
-      "text": "wwww",
-      "cardType": "white",
-      "id": 15
-    },
-    {
-      "text": "El mínimo indispensable de coherencia",
-      "cardType": "white",
-      "id": 16
     }
   ],
   "blackCards": [
