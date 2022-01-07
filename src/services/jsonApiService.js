@@ -24,13 +24,13 @@ export const getWhiteCardById = async (id) => {
 };
 
 
-export const addBlackCard = async ({ text, id }) => {
+export const addBlackCard = async ({ text }) => {
     return axios.post(whiteCards, {
         text,
-        cardType: 'white'
+        cardType: 'black'
     });
 };
-export const addWhiteCard = async ({ text, id }) => {
+export const addWhiteCard = async ({ text }) => {
     return axios.post(whiteCards, {
         text,
         cardType: 'black'

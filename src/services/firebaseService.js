@@ -10,7 +10,7 @@ export let whiteCards = [];
 // get all black cards
 export const getAllBlackCards = async () => {
     const querySnapshot = await getDocs(blackCardsRef);
-    return querySnapshot?.docs?.map(doc => doc.data()) || [];
+    return querySnapshot?.docs?.map(doc => ({ ...doc.data(), id: doc.id })) || [];
 };
 // get all white cards
 export const getAllWhiteCards = async () => {
@@ -30,13 +30,13 @@ export const getBlackCardById = async (id) => {
 };
 
 // add a black card
-export const addBlackCard = async (form) => {
-    const docRef = doc(blackCardsRef, `${form.id}`);
-    const card = { text: form.text, cardType: form.cardType, id: form.id };
+export const addBlackCard = async (text) => {
+    const docRef = doc(blackCardsRef);
+    const card = { text: text, cardType: 'black' };
     await setDoc(docRef, card);
     const consulta = await getDoc(docRef);
     if (consulta.exists()) {
-        const data = consulta.data();
+        const data = { ...consulta.data(), id: consulta.id };
         console.log(data);
         return data;
     } else {
@@ -44,13 +44,13 @@ export const addBlackCard = async (form) => {
     }
 };
 // add a white card 
-export const addWhiteCard = async (form) => {
-    const docRef = doc(whiteCardsRef, `${form.id}`);
-    const card = { text: form.text, cardType: form.cardType, id: form.id };
+export const addWhiteCard = async (text) => {
+    const docRef = doc(whiteCardsRef);
+    const card = { text: text, cardType: 'white' };
     await setDoc(docRef, card);
     const consulta = await getDoc(docRef);
     if (consulta.exists()) {
-        const data = consulta.data();
+        const data = { ...consulta.data(), id: consulta.id };
         console.log(data);
         return data;
     } else {

@@ -16,8 +16,9 @@
   margin: 0.5em 0.5em 0.5em 0;
 }
 
-textarea {
+.textarea {
   min-height: 10em;
+  height: 10em;
 }
 
 .card-creator {
@@ -33,7 +34,22 @@ textarea {
   margin: 0.5em;
 }
 
+.white {
+  background-color: white;
+  color: black;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
+
 .plus {
   margin: 0 1em;
   font-size: large;
+}
+
+.buttons-cardType {
+  display: flex;
+  flex-direction: row;
 }

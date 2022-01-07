@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from "react";
 import "./AddCard.css";
-import { addCard } from "../../services/api";
-import { addWhiteCardFS } from "../../services/firebaseService";
+import { Api } from "../../services/api";
+import ButtonComponent from "../Button/ButtonComponent";
 
-export default function AddCard() {
-  const [form, setForm] = useState({ text: "", cardType: "white", id: 3 });
+export default function AddCard({ onSubmit }) {
+  const cardTypes = ['black', 'white'];
+  const [form, setForm] = useState({ text: "", cardType: cardTypes[1] });
   const [submitSucces, setSubmitSucces] = useState(null);
+
   const handleChange = (e) => {
     setForm({ ...form, text: e.target.value });
   };
 
   const submitCard = async (e) => {
     e.preventDefault();
-    addWhiteCardFS(form);
+    const serviceCall = form.cardType === 'white' ? Api.addWhiteCard : Api.addBlackCard;
     try {
-      const postResponse = await addCard({
-        text: form.text,
-        cardType: "white",
-      });
+      const postResponse = await serviceCall(form.text);
       setSubmitSucces(true);
+      onSubmit(true);
       console.log("Card Added Correctly to the json", postResponse);
     } catch (err) {
       setSubmitSucces(false);
+      onSubmit(false);
       console.log(Object.keys(err), err.message, err.response);
       throw new Error("Unable to get a token. ", err);
     }
   };
+
+  const changeType = (cardType) => {
+    console.log('el tipo seleccionado: ', cardType)
+    setForm({ ...form, cardType })
+  }
 
   useEffect(() => {
     submitSucces && setForm({ text: "", cardType: "white" });
@@ -37,21 +43,37 @@ export default function AddCard() {
         <h2>La carta fue agregada a la colección!</h2>
       ) : (
         <form className="container">
-          <div className="card-creator">
-            <label className="label" htmlFor="cardText">
+          {/* buttons to select card type */}
+          <div className="buttons-cardType">
+            {cardTypes.map(ct =>
+              <ButtonComponent
+                buttonColor={ct}
+                text={`Carta ${ct === 'black' ? 'negra' : 'blanca'}`}
+                onClick={() => changeType(ct)}
+                type='button'
+                key={ct === 'black' ? 1 : 2}
+                disabled={false}
+
+              ></ButtonComponent>)}
+          </div>
+
+          {/* textarea to add the desired text */}
+          <div className={`card-creator ${form.cardType}`}>
+            <label className={`label ${form.cardType}`} htmlFor="cardText">
               Texto de la carta:
             </label>
             <textarea
+              className={`textarea ${form.cardType}`}
               name="cardText"
               id="text"
               value={form.text}
               onChange={handleChange}
             />
-          </div>
-
-          {submitSucces === false && (
+          </div>          {submitSucces === false && (
             <h3>Ups! Ocurrió un error al agregar la carta!</h3>
           )}
+
+          {/* submit button */}
           <button
             className="button"
             disabled={form.text === ""}
