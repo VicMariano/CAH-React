@@ -4,7 +4,7 @@ import { Api } from "../../services/api";
 import ButtonComponent from "../Button/ButtonComponent";
 
 export default function AddCard({ onSubmit }) {
-  const cardTypes = ['black', 'white'];
+  const cardTypes = ["black", "white"];
   const [form, setForm] = useState({ text: "", cardType: cardTypes[1] });
   const [submitSucces, setSubmitSucces] = useState(null);
 
@@ -14,7 +14,8 @@ export default function AddCard({ onSubmit }) {
 
   const submitCard = async (e) => {
     e.preventDefault();
-    const serviceCall = form.cardType === 'white' ? Api.addWhiteCard : Api.addBlackCard;
+    const serviceCall =
+      form.cardType === "white" ? Api.addWhiteCard : Api.addBlackCard;
     try {
       const postResponse = await serviceCall(form.text);
       setSubmitSucces(true);
@@ -29,9 +30,9 @@ export default function AddCard({ onSubmit }) {
   };
 
   const changeType = (cardType) => {
-    console.log('el tipo seleccionado: ', cardType)
-    setForm({ ...form, cardType })
-  }
+    console.log("el tipo seleccionado: ", cardType);
+    setForm({ ...form, cardType });
+  };
 
   useEffect(() => {
     submitSucces && setForm({ text: "", cardType: "white" });
@@ -45,18 +46,17 @@ export default function AddCard({ onSubmit }) {
         <form className="container">
           {/* buttons to select card type */}
           <div className="buttons-cardType">
-            {cardTypes.map(ct =>
+            {cardTypes.map((ct) => (
               <ButtonComponent
                 buttonColor={ct}
-                text={`Carta ${ct === 'black' ? 'negra' : 'blanca'}`}
+                text={`Carta ${ct === "black" ? "negra" : "blanca"}`}
                 onClick={() => changeType(ct)}
-                type='button'
-                key={ct === 'black' ? 1 : 2}
+                type="button"
+                key={ct === "black" ? 1 : 2}
                 disabled={false}
-
-              ></ButtonComponent>)}
+              ></ButtonComponent>
+            ))}
           </div>
-
           {/* textarea to add the desired text */}
           <div className={`card-creator ${form.cardType}`}>
             <label className={`label ${form.cardType}`} htmlFor="cardText">
@@ -69,10 +69,10 @@ export default function AddCard({ onSubmit }) {
               value={form.text}
               onChange={handleChange}
             />
-          </div>          {submitSucces === false && (
+          </div>{" "}
+          {submitSucces === false && (
             <h3>Ups! Ocurrió un error al agregar la carta!</h3>
           )}
-
           {/* submit button */}
           <button
             className="button"

@@ -29,6 +29,38 @@
       "text": "Nueva carta",
       "cardType": "white",
       "id": 9
+    },
+    {
+      "cardType": "black",
+      "id": 10
+    },
+    {
+      "cardType": "black",
+      "id": 11
+    },
+    {
+      "cardType": "black",
+      "id": 12
+    },
+    {
+      "cardType": "black",
+      "id": 13
+    },
+    {
+      "cardType": "black",
+      "id": 14
+    },
+    {
+      "cardType": "black",
+      "id": 15
+    },
+    {
+      "cardType": "black",
+      "id": 16
+    },
+    {
+      "cardType": "black",
+      "id": 17
     }
   ],
   "blackCards": [

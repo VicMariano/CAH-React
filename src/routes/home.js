@@ -1,12 +1,99 @@
 import image from "../assets/CAH.png";
+import ButtonComponent from "../components/Button/ButtonComponent";
+import Login from "../components/Login/Login";
 
-export default function Home() {
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  updateDoc,
+} from "@firebase/firestore";
+import { getAuth } from "@firebase/auth";
+import firebaseApp from "../services/firebaseCredentials";
+const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
+
+export default function Home({ userEmail }) {
+  const rooms = collection(firestore, "rooms");
+
+  const findRoom = async (roomId) => {
+    // crear referencia
+    const docRef = doc(rooms, roomId);
+    // buscar doc
+    const consulta = await getDoc(docRef);
+
+    // revisar si existe
+    if (consulta.exists()) {
+      const infoDoc = consulta.data();
+      addUserToRoom(roomId, infoDoc.players);
+      // si si existe
+      console.log(infoDoc);
+      return;
+    } else {
+      alert("La sala a la que tratas de unirte no existe");
+      return;
+    }
+    // si no existe
+  };
+  const addUserToRoom = async (roomId, players) => {
+    console.log(players);
+    const docRef = doc(rooms, roomId);
+    const room = { players: [...players, userEmail] };
+    await updateDoc(docRef, room);
+    const consulta = await getDoc(docRef);
+    if (consulta.exists()) {
+      const data = consulta.data();
+      console.log(data);
+      return data;
+    } else {
+      console.log("No existe!!");
+    }
+  };
+  const createRoom = async () => {
+    const roomId = prompt("¿Cómo se va a lamar tu sala?: ");
+    // crear referencia
+    const docRef = doc(rooms, roomId);
+    // buscar doc
+    const consulta = await getDoc(docRef);
+    // revisar si existe
+    if (consulta.exists()) {
+      alert(
+        "El nombre de sala que ingresaste ya existe. Intenta de nuevo con un nombre diferente"
+      );
+      // si si existe
+      const infoDoc = consulta.data();
+      console.log(infoDoc);
+      return;
+    } else {
+      // si no existe
+      const newRoom = setDoc(docRef, { players: [userEmail] });
+      if (newRoom) {
+        alert("Sala Creada!");
+        console.log(newRoom);
+      } else {
+        alert("Error al crear la sala");
+        console.log();
+      }
+    }
+  };
+  const enterRommId = async () => {
+    const roomId = prompt("Ingresa el id de la sala: ");
+    if (roomId) {
+      findRoom(roomId);
+    }
+  };
   return (
     <main style={{ padding: "1rem 0" }}>
       <h2 style={{ padding: "1rem" }}>CAH</h2>
       <h4>Juego en construcción!</h4>
+      <ButtonComponent text="Crear sala" onClick={createRoom}></ButtonComponent>
+      <ButtonComponent
+        text="Entrar a una sala"
+        onClick={enterRommId}
+      ></ButtonComponent>
       <img className="home-img" src={image} />
-      <hr />
     </main>
   );
 }

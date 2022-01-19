@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { getAllWhiteCards, getAllBlackCards } from "../services/api";
 import Card from "../components/Cards/Card";
+import { Api } from "../services/api";
 
 export default function CollectionPage() {
   const [whiteCards, setWhiteCards] = useState([]);
   const [blackCards, setBlackCards] = useState([]);
 
   const fetchCards = async () => {
-    const bCard = await getAllBlackCards();
-    const wCards = await getAllWhiteCards();
-    bCard.data.length && setBlackCards(bCard.data);
-    wCards.data.length && setWhiteCards(wCards.data);
+    const bCard = await Api.getAllBlackCards();
+    const wCards = await Api.getAllWhiteCards();
+    console.log(wCards, bCard);
+    bCard.length && setBlackCards(bCard);
+    wCards.length && setWhiteCards(wCards);
   };
 
   useEffect(() => {
+    // cuando use firestore, checkear primero si las variables del service contienen los mazos ya guardados
     fetchCards();
   }, []);
-
-  const cardsToShow = (cards) => {
-    cards &&
-      cards.map((card) => (
-        <Card text={card.text} cardType={card.cardType} key={card.id} />
-      ));
-  };
 
   return (
     <main style={{ padding: "1rem 0" }}>
