@@ -1,15 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import firebaseApp from "../../services/firebaseCredentials";
+import React, { useState } from "react";
 import {
   getAuth,
-  signInAnonymously,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import useInput from "../customHooks/useInput";
 import ButtonComponent from "../Button/ButtonComponent";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../auth/AuthContext";
+import { useAuth } from "auth/AuthContext";
 
 export default function Login() {
   const [isRegistering, setIsRegistering] = useState(true);
@@ -18,7 +16,7 @@ export default function Login() {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const { setUser } = useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const changeSignMethod = () => {
     setIsRegistering(!isRegistering);

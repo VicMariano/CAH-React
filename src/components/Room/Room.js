@@ -50,7 +50,7 @@ export default function Room({ whiteCards, blackCard, roomId, ...props }) {
   useEffect(() => {
     console.log("uE whitecards");
     const cardsToShow =
-      whiteCards.length &&
+      whiteCards?.length &&
       whiteCards.map((card) => (
         <Card
           text={card.text}
