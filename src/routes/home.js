@@ -1,6 +1,5 @@
 import image from "../assets/CAH.png";
 import ButtonComponent from "../components/Button/ButtonComponent";
-import Login from "../components/Login/Login";
 
 import {
   getFirestore,
@@ -12,11 +11,14 @@ import {
 } from "@firebase/firestore";
 import { getAuth } from "@firebase/auth";
 import firebaseApp from "../services/firebaseCredentials";
+import { useAuth } from "auth/AuthContext";
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
-export default function Home({ userEmail }) {
+export default function Home() {
   const rooms = collection(firestore, "rooms");
+  const { user } = useAuth();
+  const userEmail = user.userEmail;
 
   const findRoom = async (roomId) => {
     // crear referencia
