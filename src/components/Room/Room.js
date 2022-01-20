@@ -1,39 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import "../../App.css";
+import "./Room.css";
 import { Api } from "../../services/api";
-import CardDecksProvider, {
-  CardDeckContext,
-} from "../../auth/CardDecksContext";
+import { useDecksContext } from "../../auth/CardDecksContext";
 import Card from "../Cards/Card";
 import { blackCards } from "../../services/firestoreService";
+import HandDisplayer from "components/HandDisplayer/HandDisplayer";
 
-export default function Room({ whiteCards, blackCard, roomId, ...props }) {
-  const { whiteDeck, setWhiteDeck } = useContext(CardDeckContext);
-  console.log(CardDeckContext);
-  // const [] = useContext(CardDeckContext);
-
+export default function Room({ roomId }) {
+  const { whiteDeck, setWhiteDeck, setBlackDeck } = useDecksContext();
   const [mainBlackCard, setMainBlackCard] = useState({});
-  const cardsToShow = [];
+  const [whiteCardsHand, setWhiteCardsHand] = useState({});
+
   // gets all white cards from db
   const fetchWhiteDeck = async () => {
-    console.log("fetchwhites");
-
     const response = await Api.getAllWhiteCards();
-    console.log(response);
     setWhiteDeck(response);
   };
-  // gets all black cards from db
-  // const fetchBlackDeck = async () => {
-  //   const response = await Api.getAllBlackCards();
-  //   console.log(response);
-  //   setBlackDeck(response);
-  //   getMainBlackCard(response);
-  // };
 
-  // gets 1 black cards from deck by index
+  // gets all black cards from db
+  const fetchBlackDeck = async () => {
+    const response = await Api.getAllBlackCards();
+    setBlackDeck(response);
+    getMainBlackCard(response);
+  };
+
+  // gets 1 random black cards from deck by index
   const getMainBlackCard = async (blackDeck) => {
-    const randomIndex = getRandomInt(0, blackCards.length - 1);
+    const randomIndex = getRandomInt(0, blackDeck.length - 1);
     const mainBC = blackDeck[randomIndex];
-    console.log("carta negra ", mainBC);
+    console.log("Main Black ", mainBC);
     setMainBlackCard(mainBC);
   };
 
@@ -42,44 +38,39 @@ export default function Room({ whiteCards, blackCard, roomId, ...props }) {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
+  const onSelectWCard = (id) => {
+    console.log("from Room", id);
+  };
+
   useEffect(() => {
     fetchWhiteDeck();
-    // fetchBlackDeck();
+    fetchBlackDeck();
   }, []);
 
-  useEffect(() => {
-    console.log("uE whitecards");
-    const cardsToShow =
-      whiteCards?.length &&
-      whiteCards.map((card) => (
-        <Card
-          text={card.text}
-          cardType={card.cardType}
-          key={card.id}
-          onClick={() => console.log(`Seleccionada ${roomId}!!`)}
-        />
-      ));
-  }, [whiteDeck]);
-
   return (
-    <div>
-      <CardDecksProvider>
-        {/* main black card*/}
-        {mainBlackCard && (
-          <div className="main-black-card">
-            <Card
-              text={mainBlackCard.text}
-              cardType={mainBlackCard.cardType}
-              key={mainBlackCard.id}
-            />
-          </div>
-        )}
+    <div className="container">
+      <div className="room-header">
+        <div>
+          <h4>Id de la Sala: xxxxxxxxxx</h4>
+        </div>
+        <div>
+          <h5>Rounds ganados: 00</h5>
+        </div>
+      </div>
 
-        {/* a hand of white cards */}
-        {cardsToShow && <div className="w-card-displayer">{cardsToShow}</div>}
-
-        {/* mas adelante: la opción de escribir tu propia carta blanca */}
-      </CardDecksProvider>
+      {/* main black card*/}
+      {mainBlackCard && (
+        <div className="main-black-card">
+          <Card
+            text={mainBlackCard.text}
+            cardType={mainBlackCard.cardType}
+            key={1}
+          />
+        </div>
+      )}
+      {/* a hand of white cards */}
+      <HandDisplayer whiteCards={whiteDeck} onSelect={onSelectWCard} />
+      {/* mas adelante: la opción de escribir tu propia carta blanca */}
     </div>
   );
 }

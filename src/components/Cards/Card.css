@@ -8,6 +8,11 @@
   box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
   padding: 1em;
   margin: 0.5em;
+  cursor: pointer;
+}
+.white-card:hover {
+  box-shadow: rgba(20, 20, 20, 30) 0 8px 15px;
+  transform: translateY(-3px);
 }
 
 .black-card {

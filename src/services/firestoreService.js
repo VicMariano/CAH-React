@@ -28,7 +28,9 @@ export const getAllBlackCards = async () => {
 // get all white cards
 export const getAllWhiteCards = async () => {
   const querySnapshot = await getDocs(whiteCardsRef);
-  return querySnapshot?.docs?.map((doc) => doc.data()) || [];
+  return (
+    querySnapshot?.docs?.map((doc) => ({ ...doc.data(), id: doc.id })) || []
+  );
 };
 
 // get a black card by id

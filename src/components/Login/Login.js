@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 import { useAuth } from "auth/AuthContext";
 
 export default function Login() {
-  const [isRegistering, setIsRegistering] = useState(true);
+  const [isRegistering, setIsRegistering] = useState(false);
   const [email, bindEmail, clearEmail] = useInput("");
   const [pass, bindPass, clearPass] = useInput("");
   const auth = getAuth();
@@ -33,7 +33,7 @@ export default function Login() {
           pass
         );
         const user = userCredential.user;
-        console.log(userCredential, user);
+        console.log("From login: ", userCredential, user);
         setUser(user);
         navigate("/");
       } catch (error) {
@@ -51,7 +51,8 @@ export default function Login() {
           pass
         );
         const user = userCredential.user;
-        console.log(userCredential, user);
+        console.log("From login: ", userCredential, user);
+        setUser(user);
         navigate("/");
       } catch (error) {
         alert(error.code, error.message);
