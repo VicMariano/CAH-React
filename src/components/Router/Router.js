@@ -33,9 +33,9 @@ export default function Router() {
               <Route
                 path="/playPage"
                 element={
-                  // <Private>
-                  <PlayPage />
-                  // </Private>
+                  <Private>
+                    <PlayPage />
+                  </Private>
                 }
               />
               <Route

@@ -53,8 +53,9 @@ export default function Room({ roomId }) {
         <div>
           <h4>Id de la Sala: xxxxxxxxxx</h4>
         </div>
-        <div>
-          <h5>Rounds ganados: 00</h5>
+        <div style={{ textAlign: "right" }}>
+          <h5>Round: 0</h5>
+          <h5>Rounds ganados: 0</h5>
         </div>
       </div>
 
