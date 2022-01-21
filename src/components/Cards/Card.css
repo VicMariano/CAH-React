@@ -1,9 +1,9 @@
 .white-card {
   color: black;
   background-color: white;
-  height: 12em;
-  width: 8em;
-  min-width: 8em;
+  height: 13em;
+  width: 9em;
+  min-width: 9em;
   border-radius: 0.5rem;
   box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
   padding: 1em;
@@ -18,9 +18,9 @@
 .black-card {
   color: white;
   background-color: black;
-  height: 12em;
-  width: 8em;
-  min-width: 8em;
+  height: 13em;
+  width: 9em;
+  min-width: 9em;
   border-radius: 0.5rem;
   box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem;
   padding: 1em;
