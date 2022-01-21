@@ -15,9 +15,7 @@ const AuthProvider = ({ children }) => {
   });
 
   const data = { user, setUser };
-  useEffect(() => {
-    console.log("Cambio de user en AuthContext: ", user);
-  }, [user]);
+
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 

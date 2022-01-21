@@ -8,9 +8,12 @@ import useInput from "../customHooks/useInput";
 import ButtonComponent from "../Button/ButtonComponent";
 import { useNavigate } from "react-router";
 import { useAuth } from "auth/AuthContext";
+import { Api } from "services/api";
+import { updateName } from "services/firebaseAuth";
 
 export default function Login() {
   const [isRegistering, setIsRegistering] = useState(false);
+  const [name, bindName, clearName] = useInput("");
   const [email, bindEmail, clearEmail] = useInput("");
   const [pass, bindPass, clearPass] = useInput("");
   const auth = getAuth();
@@ -24,7 +27,7 @@ export default function Login() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("email: ", email, ", pass: ", pass);
+    console.log("email: ", email, ", pass: ", pass, "name: ", name);
     if (isRegistering) {
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -33,7 +36,8 @@ export default function Login() {
           pass
         );
         const user = userCredential.user;
-        console.log("From login: ", userCredential, user);
+        const resUserAdded = await Api.addNewUser(user);
+        resUserAdded && (await updateName(name));
         setUser(user);
         navigate("/");
       } catch (error) {
@@ -52,6 +56,8 @@ export default function Login() {
         );
         const user = userCredential.user;
         console.log("From login: ", userCredential, user);
+        const resNameUser = await updateName(name);
+        console.log("name updated? ", resNameUser);
         setUser(user);
         navigate("/");
       } catch (error) {
@@ -72,9 +78,12 @@ export default function Login() {
               display: "flex",
               flexDirection: "column",
               width: "15em",
+              marginTop: "5em",
             }}
           >
-            <label style={{ marginTop: "3em" }}>Email</label>
+            {isRegistering && <label>Nombre</label>}
+            {isRegistering && <input type="text" {...bindName} />}
+            <label>Email</label>
             <input type="email" {...bindEmail} />
             <label>Password</label>
             <input
@@ -85,6 +94,7 @@ export default function Login() {
             <ButtonComponent
               type="submit"
               text={isRegistering ? "Registrarme" : "Iniciar sesión"}
+              disabled={(isRegistering && !name) || !email || !pass}
             ></ButtonComponent>
           </div>
         </form>

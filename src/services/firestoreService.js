@@ -15,6 +15,7 @@ import {
 const firestore = getFirestore(firebaseApp);
 const blackCardsRef = collection(firestore, "black-cards");
 const whiteCardsRef = collection(firestore, "white-cards");
+const usersRef = collection(firestore, "users");
 export let blackCards = [];
 export let whiteCards = [];
 
@@ -77,6 +78,25 @@ export const addWhiteCard = async (text) => {
   }
 };
 
+export const addNewUser = async (user, roomId) => {
+  const docRef = doc(usersRef, user.email);
+  const newUser = {
+    email: user.email,
+    uid: user.uid,
+    name: user.displayName,
+    roomId: roomId ?? null,
+  };
+  console.log(newUser);
+  await setDoc(docRef, newUser);
+  const consulta = await getDoc(docRef);
+  if (consulta.exists()) {
+    const data = { ...consulta.data(), id: consulta.id };
+    console.log("Usuario nuevo ", data);
+    return data;
+  } else {
+    console.error("No se pudo agregar el usuario");
+  }
+};
 // old way updating to add new white card
 // export const addWhiteCardFS = async ({ form }) => {
 //     const docRef = doc(firestore, `cards/white-cards`);
@@ -100,4 +120,5 @@ export default {
   getWhiteCardById,
   addBlackCard,
   addWhiteCard,
+  addNewUser,
 };

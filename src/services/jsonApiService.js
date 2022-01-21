@@ -34,6 +34,10 @@ export const addWhiteCard = async ({ text }) => {
   });
 };
 
+export const addNewUser = async (user) => {
+  console.log("usuario para agregar al json ", user);
+};
+
 export default {
   getAllBlackCards,
   getAllWhiteCards,
@@ -41,4 +45,5 @@ export default {
   getWhiteCardById,
   addWhiteCard,
   addBlackCard,
+  addNewUser,
 };

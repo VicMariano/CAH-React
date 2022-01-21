@@ -17,6 +17,7 @@ export default function CollectionPage() {
   useEffect(() => {
     // cuando use firestore, checkear primero si las variables del service contienen los mazos ya guardados
     fetchCards();
+    return () => null;
   }, []);
 
   return (

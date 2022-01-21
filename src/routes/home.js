@@ -88,13 +88,23 @@ export default function Home() {
   };
   return (
     <main style={{ padding: "1rem 0" }}>
-      <h2 style={{ padding: "1rem" }}>CAH</h2>
-      <h4>Juego en construcción!</h4>
-      <ButtonComponent text="Crear sala" onClick={createRoom}></ButtonComponent>
-      <ButtonComponent
-        text="Entrar a una sala"
-        onClick={enterRommId}
-      ></ButtonComponent>
+      <h1 style={{ padding: "1rem 0 2rem 0" }}>
+        Cards Against Humanity ... mas o menos
+      </h1>
+      <h3 style={{ padding: "1rem 0 2rem 0" }}>
+        Bienvenide {auth.currentUser.displayName} !
+      </h3>
+      <div style={{ padding: "1rem 0 2rem 0" }}>
+        <ButtonComponent
+          text="Crear sala"
+          onClick={createRoom}
+        ></ButtonComponent>
+        <ButtonComponent
+          text="Entrar a una sala"
+          onClick={enterRommId}
+        ></ButtonComponent>
+      </div>
+
       <img className="home-img" src={image} />
     </main>
   );
