@@ -11,7 +11,7 @@ import {
 } from "@firebase/firestore";
 import { getAuth } from "@firebase/auth";
 import firebaseApp from "../services/firebaseCredentials";
-import { useAuth } from "auth/AuthContext";
+import { useAuth } from "contexts/AuthContext";
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 

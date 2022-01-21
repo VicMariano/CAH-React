@@ -7,7 +7,7 @@ import {
 import useInput from "../customHooks/useInput";
 import ButtonComponent from "../Button/ButtonComponent";
 import { useNavigate } from "react-router";
-import { useAuth } from "auth/AuthContext";
+import { useAuth } from "contexts/AuthContext";
 import { Api } from "services/api";
 import { updateName } from "services/firebaseAuth";
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../App.css";
 import "./Room.css";
 import { Api } from "../../services/api";
-import { useDecksContext } from "../../auth/CardDecksContext";
+import { useDecksContext } from "../../contexts/CardDecksContext";
 import Card from "../Cards/Card";
 import { blackCards } from "../../services/firestoreService";
 import HandDisplayer from "components/HandDisplayer/HandDisplayer";

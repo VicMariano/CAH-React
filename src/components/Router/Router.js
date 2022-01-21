@@ -7,7 +7,7 @@ import Home from "../../routes/home";
 import PlayPage from "../../routes/playPage";
 import Navbar from "../Navbar/Navbar";
 import Login from "../Login/Login";
-import AuthProvider, { useAuth } from "auth/AuthContext";
+import AuthProvider, { useAuth } from "contexts/AuthContext";
 
 const Private = (props) => {
   const { user } = useAuth();

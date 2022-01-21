@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Api } from "../services/api";
 import Room from "../components/Room/Room";
-import CardDecksProvider, { CardDeckContext } from "../auth/CardDecksContext";
+import CardDecksProvider, {
+  CardDeckContext,
+} from "../contexts/CardDecksContext";
 
 export default function PlayPage() {
   return (

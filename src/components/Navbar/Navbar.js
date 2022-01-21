@@ -4,7 +4,7 @@ import { Nav, NavLink } from "./NavbarElements";
 
 import firebaseApp from "../../services/firebaseCredentials";
 import { getAuth, signOut } from "@firebase/auth";
-import { useAuth } from "auth/AuthContext";
+import { useAuth } from "contexts/AuthContext";
 const auth = getAuth(firebaseApp);
 export default function Navbar() {
   const { user } = useAuth();

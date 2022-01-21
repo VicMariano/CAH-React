@@ -1,5 +1,5 @@
 import "./App.css";
-import AuthProvider from "./auth/AuthContext";
+import AuthProvider from "./contexts/AuthContext";
 
 import Router from "./components/Router/Router";
 
