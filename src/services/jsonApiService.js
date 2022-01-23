@@ -38,6 +38,22 @@ export const addNewUser = async (user) => {
   console.log("usuario para agregar al json ", user);
 };
 
+export const createRoom = async (...data) => {
+  console.log("Creando sala en el json ", data);
+};
+
+export const findRoom = async (...data) => {
+  console.log("Buscando sala en el json ", data);
+};
+
+export const addUserToRoom = async (...data) => {
+  console.log("usuario para agregar a sala del json ", data);
+};
+
+export const listenRoom = async (...data) => {
+  console.log("Función para oir cambios en sala del json ", data);
+};
+
 export default {
   getAllBlackCards,
   getAllWhiteCards,
@@ -46,4 +62,8 @@ export default {
   addWhiteCard,
   addBlackCard,
   addNewUser,
+  createRoom,
+  findRoom,
+  addUserToRoom,
+  listenRoom,
 };

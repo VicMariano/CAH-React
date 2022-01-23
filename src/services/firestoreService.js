@@ -10,6 +10,7 @@ import {
   getDocs,
   get,
   where,
+  onSnapshot,
 } from "firebase/firestore";
 
 // CARDS
@@ -122,10 +123,11 @@ const createRoom = async (userEmail, roomId) => {
     return;
   } else {
     // si no existe
-    const newRoom = setDoc(docRef, { players: [userEmail] });
+    const newRoom = setDoc(docRef, { players: [userEmail], roomId });
     if (newRoom) {
       alert("Sala Creada!");
       console.log(newRoom);
+      return newRoom;
     } else {
       alert("Error al crear la sala");
     }
@@ -140,13 +142,7 @@ const findRoom = async (userEmail, roomId) => {
   // revisar si existe
   if (consulta.exists()) {
     // si si existe
-    const newRoom = consulta.data();
-    const newRoomWithUser = await addUserToRoom(
-      docRef,
-      newRoom.players,
-      userEmail
-    );
-    return newRoomWithUser;
+    return consulta.data();
   } else {
     // si no existe
     alert("La sala a la que tratas de unirte no existe");
@@ -154,10 +150,12 @@ const findRoom = async (userEmail, roomId) => {
   }
 };
 
-const addUserToRoom = async (docRef, players, userEmail) => {
-  console.log(players);
-  const room = { players: [...players, userEmail] };
-  await updateDoc(docRef, room);
+const addUserToRoom = async (roomId, room, userEmail) => {
+  const docRef = doc(rooms, roomId);
+  const players = room.players;
+  const roomUpdate = { players: [...players, userEmail] };
+  console.log(room, roomUpdate);
+  await updateDoc(docRef, roomUpdate);
   const consulta = await getDoc(docRef);
   if (consulta.exists()) {
     const data = consulta.data();
@@ -166,6 +164,13 @@ const addUserToRoom = async (docRef, players, userEmail) => {
   } else {
     alert("No existe la sala a la que tratas de unirte.");
   }
+};
+
+const listenRoom = async (roomId, set) => {
+  const unsub = onSnapshot(doc(firestore, "rooms", roomId), (doc) => {
+    console.log("Current data: ", doc.data());
+    set(doc.data());
+  });
 };
 
 export default {
@@ -178,6 +183,8 @@ export default {
   addNewUser,
   createRoom,
   findRoom,
+  addUserToRoom,
+  listenRoom,
 };
 
 // old way updating to add new white card
