@@ -1,3 +1,4 @@
+import { Loading } from "components/Loading/Loading";
 import React, { useState, useEffect } from "react";
 import Card from "../components/Cards/Card";
 import { Api } from "../services/api";
@@ -34,7 +35,7 @@ export default function CollectionPage() {
             ))}
         </div>
       ) : (
-        <h3>No hay cartas negras en tu colección</h3>
+        <Loading />
       )}
       <hr />
       <h3>White Cards</h3>
@@ -46,7 +47,7 @@ export default function CollectionPage() {
             ))}
         </div>
       ) : (
-        <h3>No hay cartas blancas en tu colección</h3>
+        <Loading />
       )}
     </main>
   );

@@ -14,7 +14,6 @@ export default function Navbar() {
       <Nav className="navbar">
         <NavLink to="/"> CAH</NavLink>
         <div className="nav-menu">
-          {auth.currentUser && <NavLink to="/playPage">Juego</NavLink>}
           {auth.currentUser && (
             <NavLink to="/addCardPage">Agregar carta</NavLink>
           )}

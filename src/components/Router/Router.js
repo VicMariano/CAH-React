@@ -4,7 +4,6 @@ import "../../App.css";
 import AddCardPage from "../../routes/addCardPage";
 import CollectionPage from "../../routes/collectionPage";
 import Home from "../../routes/home";
-import PlayPage from "../../routes/playPage";
 import Navbar from "../Navbar/Navbar";
 import Login from "../Login/Login";
 import AuthProvider, { useAuth } from "contexts/AuthContext";
@@ -30,14 +29,7 @@ export default function Router() {
                   </Private>
                 }
               />
-              <Route
-                path="/playPage"
-                element={
-                  <Private>
-                    <PlayPage />
-                  </Private>
-                }
-              />
+
               <Route
                 path="/collectionPage"
                 element={

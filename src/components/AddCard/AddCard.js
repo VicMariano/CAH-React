@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./AddCard.css";
 import { Api } from "../../services/api";
 import ButtonComponent from "../Button/ButtonComponent";
+import { Loading } from "components/Loading/Loading";
 
 export default function AddCard({ onSubmit }) {
   const cardTypes = ["black", "white"];
   const [form, setForm] = useState({ text: "", cardType: cardTypes[1] });
   const [submitSucces, setSubmitSucces] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleChange = (e) => {
     setForm({ ...form, text: e.target.value });
   };
 
   const submitCard = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const serviceCall =
       form.cardType === "white" ? Api.addWhiteCard : Api.addBlackCard;
@@ -26,6 +29,8 @@ export default function AddCard({ onSubmit }) {
       onSubmit(false);
       console.log(Object.keys(err), err.message, err.response);
       throw new Error("Unable to get a token. ", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,54 +40,68 @@ export default function AddCard({ onSubmit }) {
   };
 
   useEffect(() => {
+    setLoading(false);
+    return () => {
+      console.log();
+    };
+  }, []);
+
+  useEffect(() => {
     submitSucces && setForm({ text: "", cardType: "white" });
+    return () => {};
   }, [submitSucces]);
 
   return (
     <div className="container">
-      {submitSucces ? (
-        <h2>La carta fue agregada a la colección!</h2>
+      {loading ? (
+        <Loading />
       ) : (
-        <form className="container">
-          {/* buttons to select card type */}
-          <div className="buttons-cardType">
-            {cardTypes.map((ct) => (
-              <ButtonComponent
-                buttonColor={ct}
-                text={`Carta ${ct === "black" ? "negra" : "blanca"}`}
-                onClick={() => changeType(ct)}
-                type="button"
-                key={ct === "black" ? 1 : 2}
-                disabled={false}
-              ></ButtonComponent>
-            ))}
-          </div>
-          {/* textarea to add the desired text */}
-          <div className={`card-creator ${form.cardType}`}>
-            <label className={`label ${form.cardType}`} htmlFor="cardText">
-              Texto de la carta:
-            </label>
-            <textarea
-              className={`textarea ${form.cardType}`}
-              name="cardText"
-              id="text"
-              value={form.text}
-              onChange={handleChange}
-            />
-          </div>{" "}
-          {submitSucces === false && (
-            <h3>Ups! Ocurrió un error al agregar la carta!</h3>
+        <div>
+          {submitSucces ? (
+            <h2>La carta fue agregada a la colección!</h2>
+          ) : (
+            <form className="container">
+              {/* buttons to select card type */}
+              <div className="buttons-cardType">
+                {cardTypes.map((ct) => (
+                  <ButtonComponent
+                    buttonColor={ct}
+                    text={`Carta ${ct === "black" ? "negra" : "blanca"}`}
+                    onClick={() => changeType(ct)}
+                    type="button"
+                    key={ct === "black" ? 1 : 2}
+                    disabled={false}
+                  ></ButtonComponent>
+                ))}
+              </div>
+              {/* textarea to add the desired text */}
+              <div className={`card-creator ${form.cardType}`}>
+                <label className={`label ${form.cardType}`} htmlFor="cardText">
+                  Texto de la carta:
+                </label>
+                <textarea
+                  className={`textarea ${form.cardType}`}
+                  name="cardText"
+                  id="text"
+                  value={form.text}
+                  onChange={handleChange}
+                />
+              </div>{" "}
+              {submitSucces === false && !loading && (
+                <h3>Ups! Ocurrió un error al agregar la carta!</h3>
+              )}
+              {/* submit button */}
+              <button
+                className="button"
+                disabled={form.text === ""}
+                type="submit"
+                onClick={submitCard}
+              >
+                <strong className="plus">+</strong> Agregar carta
+              </button>
+            </form>
           )}
-          {/* submit button */}
-          <button
-            className="button"
-            disabled={form.text === ""}
-            type="submit"
-            onClick={submitCard}
-          >
-            <strong className="plus">+</strong> Agregar carta
-          </button>
-        </form>
+        </div>
       )}
     </div>
   );

@@ -1,20 +1,30 @@
+import ButtonComponent from "components/Button/ButtonComponent";
+import { useState } from "react/cjs/react.development";
 import AddCard from "../components/AddCard/AddCard";
 
 export default function AddCardPage() {
-  let cardAdded = false;
+  const [cardAdded, setCardAdded] = useState(false);
   const onSubmit = (isAdded) => {
-    cardAdded = isAdded;
+    setCardAdded(isAdded);
   };
   return (
     <main style={{ padding: "1rem 0" }}>
-      {!cardAdded && (
+      {cardAdded ? (
+        <>
+          <h2>La carta fue agregada a la colección!</h2>
+          <ButtonComponent
+            text="Agregar otra carta"
+            onClick={() => setCardAdded(false)}
+          ></ButtonComponent>
+        </>
+      ) : (
         <div>
-          <h4>¿Tenes una mejor respuesta?</h4>
-          <h2> Agregala a la colección</h2>
+          <h4>¿Tenes una idea para una carta nueva?</h4>
+          <h2> Agregala al mazo</h2>
         </div>
       )}
       <br />
-      <AddCard onSubmit={onSubmit}></AddCard>
+      {!cardAdded && <AddCard onSubmit={onSubmit}></AddCard>}
     </main>
   );
 }
