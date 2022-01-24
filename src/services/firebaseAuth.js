@@ -4,7 +4,7 @@ import firebaseApp from "./firebaseCredentials";
 const auth = getAuth(firebaseApp);
 
 export const updateName = async (name) => {
-  updateProfile(auth.currentUser, {
+  await updateProfile(auth.currentUser, {
     displayName: String(name),
     // photoURL: "https://example.com/jane-q-user/profile.jpg"
   })

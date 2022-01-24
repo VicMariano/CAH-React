@@ -19,6 +19,7 @@ const blackCardsRef = collection(firestore, "black-cards");
 const whiteCardsRef = collection(firestore, "white-cards");
 // USERS
 const usersRef = collection(firestore, "users");
+const userDocRef = (email) => doc(usersRef, email);
 // ROOMS
 const rooms = collection(firestore, "rooms");
 
@@ -107,7 +108,7 @@ export const addNewUser = async (user, roomId) => {
 
 // ROOMS
 
-const createRoom = async (userEmail, roomId) => {
+const createRoom = async ({ email, displayName }, roomId) => {
   // crear referencia
   const docRef = doc(rooms, roomId);
   // buscar doc
@@ -120,21 +121,26 @@ const createRoom = async (userEmail, roomId) => {
     );
     const infoDoc = consulta.data();
     console.log(infoDoc);
-    return;
+    return null;
   } else {
     // si no existe
-    const newRoom = setDoc(docRef, { players: [userEmail], roomId });
-    if (newRoom) {
-      alert("Sala Creada!");
-      console.log(newRoom);
-      return newRoom;
+    await setDoc(docRef, {
+      players: [{ email, displayName, owner: true }],
+      roomId,
+    });
+    const newRoom = await getDoc(docRef);
+    if (newRoom.exists()) {
+      const roomData = newRoom.data();
+      console.log("Sala Creada!");
+      console.log(roomData);
+      return roomData;
     } else {
       alert("Error al crear la sala");
     }
   }
 };
 
-const findRoom = async (userEmail, roomId) => {
+const findRoom = async (roomId) => {
   // crear referencia
   const docRef = doc(rooms, roomId);
   // buscar doc
@@ -150,10 +156,13 @@ const findRoom = async (userEmail, roomId) => {
   }
 };
 
-const addUserToRoom = async (roomId, room, userEmail) => {
+const addUserToRoom = async (roomId, room, user) => {
+  const { email, displayName } = { ...user };
   const docRef = doc(rooms, roomId);
   const players = room.players;
-  const roomUpdate = { players: [...players, userEmail] };
+  const roomUpdate = {
+    players: [...players, { email, displayName, owner: false }],
+  };
   console.log(room, roomUpdate);
   await updateDoc(docRef, roomUpdate);
   const consulta = await getDoc(docRef);

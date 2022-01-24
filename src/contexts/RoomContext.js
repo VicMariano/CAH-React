@@ -4,8 +4,9 @@ export const RoomContext = createContext([]);
 
 const RoomProvider = (props) => {
   const [room, setRoom] = useState(null);
+  const [imOwner, setImOwner] = useState(false);
   return (
-    <RoomContext.Provider value={{ room, setRoom }}>
+    <RoomContext.Provider value={{ room, setRoom, imOwner, setImOwner }}>
       {props.children}
     </RoomContext.Provider>
   );

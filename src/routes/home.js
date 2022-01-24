@@ -14,7 +14,6 @@ import firebaseApp from "../services/firebaseCredentials";
 import { useAuth } from "contexts/AuthContext";
 import { AccessRoom } from "components/AccessRoom/AccessRoom";
 import { PocStackCards } from "components/PocStackCards/PocStackCards";
-import RoomProvider from "contexts/RoomContext";
 const auth = getAuth(firebaseApp);
 
 export default function Home() {
@@ -26,9 +25,7 @@ export default function Home() {
       <h3 style={{ padding: "1rem 0 2rem 0" }}>
         Bienvenide {auth.currentUser.displayName} !
       </h3>
-      <RoomProvider>
-        <AccessRoom></AccessRoom>
-      </RoomProvider>
+      <AccessRoom></AccessRoom>
 
       {/* <PocStackCards></PocStackCards> */}
       <img className="home-img" src={image} />

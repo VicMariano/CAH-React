@@ -1,16 +1,38 @@
 import { useState, createContext, useContext, useEffect } from "react";
+import { Api } from "services/api";
 
 export const CardDeckContext = createContext([]);
 
 const CardDecksProvider = (props) => {
   const [whiteDeck, setWhiteDeck] = useState(null);
   const [blackDeck, setBlackDeck] = useState(null);
+
+  // gets all white cards from db
+  const fetchWhiteDeck = async () => {
+    const response = await Api.getAllWhiteCards();
+    setWhiteDeck(response);
+  };
+
+  // gets all black cards from db
+  const fetchBlackDeck = async () => {
+    const response = await Api.getAllBlackCards();
+    setBlackDeck(response);
+  };
+
+  const fetchDecks = async () => {
+    await fetchBlackDeck();
+    await fetchWhiteDeck();
+  };
+
   useEffect(() => {
-    console.log("WhiteDeck changed ", whiteDeck);
-  }, [whiteDeck]);
-  useEffect(() => {
-    console.log("BlackDeck changed ", whiteDeck);
-  }, [blackDeck]);
+    if (props) {
+      fetchDecks();
+    }
+    return () => {
+      console.log("CardDecksContext Unmount");
+    };
+  }, []);
+
   return (
     <CardDeckContext.Provider
       value={{

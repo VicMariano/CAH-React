@@ -8,29 +8,26 @@ import firebaseApp from "services/firebaseCredentials";
 const auth = getAuth(firebaseApp);
 
 export const AccessRoom = () => {
-  const userEmail = auth.currentUser.email;
-  const userName = auth.currentUser.displayName;
-  const { setRoom } = useRoomContext();
+  const user = auth.currentUser;
+  const { setRoom, setImOwner } = useRoomContext();
   const navigate = useNavigate();
 
   const createRoom = async () => {
     const roomId = prompt("¿Cómo se va a llamar tu sala?: ");
-    const newRoom = null;
     if (roomId) {
-      console.log(`${userName} está creando la sala ${roomId}`);
+      console.log(`${user.displayName} está creando la sala ${roomId}`);
+      let newRoom = null;
       try {
-        newRoom = await Api.createRoom(userEmail, roomId);
-      } catch (error) {
-        console.error("Error al crear sala", error);
-      } finally {
-        // run this code no matter what the previous outcomes
+        newRoom = await Api.createRoom(user, roomId);
         if (newRoom) {
           console.log(newRoom);
-          setRoom({ roomId });
+          setRoom(newRoom);
+          setImOwner(true);
           navigate("/playPage");
         } else {
-          console.log("No hay sala nueva!");
         }
+      } catch (error) {
+        console.log(error);
       }
     }
   };
@@ -38,11 +35,13 @@ export const AccessRoom = () => {
   const enterRommId = async () => {
     const roomId = prompt("Ingresa el id de la sala: ");
     if (roomId) {
-      const room = await Api.findRoom(userEmail, roomId);
+      const room = await Api.findRoom(roomId);
       if (room && !checkUserAsPlayer(room.players)) {
-        const roomUpdate = await Api.addUserToRoom(roomId, room, userEmail);
+        const roomUpdate = await Api.addUserToRoom(roomId, room, user);
+        roomUpdate && setRoom(roomUpdate);
         roomUpdate && navigate("/playPage");
       } else if (room) {
+        setRoom(room);
         navigate("/playPage");
       } else {
         console.error("No se pudo entrar a la sala");
@@ -51,7 +50,7 @@ export const AccessRoom = () => {
   };
 
   const checkUserAsPlayer = (players) => {
-    return players.some((player) => player === userEmail);
+    return players.some((player) => player.email === user.email);
   };
 
   return (

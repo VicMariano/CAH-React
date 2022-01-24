@@ -6,18 +6,22 @@ import { useEffect } from "react/cjs/react.development";
 import { Api } from "services/api";
 
 export const WaitingRoom = ({ start }) => {
-  const { room, setRoom } = useRoomContext();
+  const { room, setRoom, imOwner } = useRoomContext();
 
   useEffect(() => {
-    Api.listenRoom(room.roomId, setRoom);
+    if (room && room.roomId) {
+      Api.listenRoom(room.roomId, setRoom);
+    }
   }, []);
 
   useEffect(() => {
-    return console.log(room);
+    return console.log("The room is changing! ", room);
   }, [room]);
 
   const list = room
-    ? room.players.map((player, index) => <li key={index}>{player}</li>)
+    ? room.players.map((player, index) => (
+        <li key={index}>{player.displayName}</li>
+      ))
     : null;
   return (
     <div>
@@ -33,13 +37,15 @@ export const WaitingRoom = ({ start }) => {
               marginBottom: "1em",
             }}
           >
-            <h3>Sala: {room.id ?? "Id Hardcoded"}</h3>
+            <h3>Sala: {room.roomId ?? "Id Hardcoded"}</h3>
             <ol style={{ textAlign: "left" }}>{list}</ol>
           </div>
-          <ButtonComponent
-            text="Comenzar"
-            onClick={() => start(true)}
-          ></ButtonComponent>
+          {imOwner && (
+            <ButtonComponent
+              text="Comenzar"
+              onClick={() => start(true)}
+            ></ButtonComponent>
+          )}
         </div>
       ) : (
         <Loading />

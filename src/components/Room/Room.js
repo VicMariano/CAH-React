@@ -4,26 +4,26 @@ import "./Room.css";
 import { Api } from "../../services/api";
 import { useDecksContext } from "../../contexts/CardDecksContext";
 import Card from "../Cards/Card";
-import { blackCards } from "../../services/firestoreService";
 import HandDisplayer from "components/HandDisplayer/HandDisplayer";
 
 export default function Room({ roomId }) {
-  const { whiteDeck, setWhiteDeck, setBlackDeck } = useDecksContext();
+  const { whiteDeck, setWhiteDeck, blackDeck, setBlackDeck } =
+    useDecksContext();
   const [mainBlackCard, setMainBlackCard] = useState({});
   const [whiteCardsHand, setWhiteCardsHand] = useState({});
 
-  // gets all white cards from db
-  const fetchWhiteDeck = async () => {
-    const response = await Api.getAllWhiteCards();
-    setWhiteDeck(response);
-  };
+  // // gets all white cards from db
+  // const fetchWhiteDeck = async () => {
+  //   const response = await Api.getAllWhiteCards();
+  //   setWhiteDeck(response);
+  // };
 
-  // gets all black cards from db
-  const fetchBlackDeck = async () => {
-    const response = await Api.getAllBlackCards();
-    setBlackDeck(response);
-    getMainBlackCard(response);
-  };
+  // // gets all black cards from db
+  // const fetchBlackDeck = async () => {
+  //   const response = await Api.getAllBlackCards();
+  //   setBlackDeck(response);
+  //   getMainBlackCard(response);
+  // };
 
   // gets 1 random black cards from deck by index
   const getMainBlackCard = async (blackDeck) => {
@@ -43,9 +43,17 @@ export default function Room({ roomId }) {
   };
 
   useEffect(() => {
-    fetchWhiteDeck();
-    fetchBlackDeck();
-  }, []);
+    // fetchWhiteDeck();
+    // fetchBlackDeck();
+    if (whiteDeck && blackDeck) {
+      console.log(
+        "El mazo negro tiene ",
+        blackDeck.length,
+        "cartas y el blanco ",
+        whiteDeck.length
+      );
+    }
+  }, [whiteDeck]);
 
   return (
     <div className="container">

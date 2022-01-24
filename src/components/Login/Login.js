@@ -56,8 +56,6 @@ export default function Login() {
         );
         const user = userCredential.user;
         console.log("From login: ", userCredential, user);
-        const resNameUser = await updateName(name);
-        console.log("name updated? ", resNameUser);
         setUser(user);
         navigate("/");
       } catch (error) {

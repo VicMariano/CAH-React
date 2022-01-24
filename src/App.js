@@ -2,12 +2,15 @@ import "./App.css";
 import AuthProvider from "./contexts/AuthContext";
 
 import Router from "./components/Router/Router";
+import RoomProvider from "contexts/RoomContext";
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
-        <Router></Router>
+        <RoomProvider>
+          <Router></Router>
+        </RoomProvider>
       </AuthProvider>
     </div>
   );
