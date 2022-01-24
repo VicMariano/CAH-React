@@ -28,6 +28,7 @@ export const WaitingRoom = ({ start }) => {
   useEffect(() => {
     if (room && room.roomId) {
       Api.listenRoom(room.roomId, setRoom);
+      Api.getRounds(room.roomId);
     }
   }, []);
 
@@ -56,55 +57,66 @@ export const WaitingRoom = ({ start }) => {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
-  // const createRound = (roundNumber, judgeUser) => {
-  //   const roundContent = {
-  //     roundNumber: roundNumber,
-  //     judge: { judgeUser },
-  //     playersDeals: [{}],
-  //     blackCard: "",
-  //     winner: {},
-  //     prompts: [],
-  //   };
+  const createRound = (roundNumber, judgeUser) => {
+    const roundContent = {
+      roundNumber: roundNumber,
+      judge: { judgeUser },
+      playersDeals: [{}],
+      blackCard: "",
+      winner: {},
+      prompts: [],
+    };
 
-  //   Api.createRound(room.roomId, roundNumber, roundContent);
-  // };
+    Api.createRound(room.roomId, roundNumber, roundContent);
+  };
 
-  // const extractThreeRandomWCards = () => {
-  //  const randomCards = [];
-  //   for (let index = 0; index < 2; index++) {
-  //     const indexSelected = getRandomInt(0, whiteDeckInGame.length() - 1);
-  //     const cardToDeal = whiteDeckInGame.splice(indexSelected, 1);
-  //     randomCards.push(cardToDeal);
-  //     console.log(
-  //       "Index selected ",
-  //       indexSelected,
-  //       ", card to deal  ",
-  //       cardToDeal,
-  //       ", randomCards selected ",
-  //       randomCards
-  //     );
-  //   }
-  //   return randomCards;
-  // };
+  const extractThreeRandomWCards = () => {
+    const randomCards = [];
+    for (let index = 0; index < 2; index++) {
+      const indexSelected = getRandomInt(0, whiteDeckInGame.length() - 1);
+      const cardToDeal = whiteDeckInGame.splice(indexSelected, 1);
+      randomCards.push(cardToDeal);
+      console.log(
+        "Index selected ",
+        indexSelected,
+        ", card to deal  ",
+        cardToDeal,
+        ", randomCards selected ",
+        randomCards
+      );
+    }
+    return randomCards;
+  };
 
-  // const dealWhiteCards = async () => {
-  //   const playersDeals = []
-  //   // deal 2 white cards to each player
+  const dealWhiteCards = async () => {
+    const playersDeals = [];
+    // deal 2 white cards to each player
 
-  //   const testDeal = room.players.map(player => playersDeals.push({email: player.email, displayName: player.displayName, cardsDeal: extractThreeRandomWCards()}))
-  // };
+    const testDeal = room.players.map((player) =>
+      playersDeals.push({
+        email: player.email,
+        displayName: player.displayName,
+        cardsDeal: extractThreeRandomWCards(),
+      })
+    );
+    console.log("Test deal: ", testDeal, " , PlayersDeals: ", playersDeals);
+  };
 
-  // const chooseBlackCard = () => {};
+  const chooseBlackCard = () => {};
 
-  // const chooseJudge = () => {};
+  const chooseJudge = () => {};
 
   // deal cards to players
   const dealCards = () => {
-    // setBlackDeckIGame(blackDeck);
-    // setWhiteDeckInGame(whiteDeck);
-    // dealWhiteCards();
-    // chooseBlackCard();
-    // chooseJudge();
+    setBlackDeckIGame(blackDeck);
+    setWhiteDeckInGame(whiteDeck);
+    const nextRound = room.rounds.length;
+    // crea el primer round con el owner como juez
+    createRound(1, user);
+
+    dealWhiteCards();
+    chooseBlackCard();
+    chooseJudge();
     console.log("Repartiendoo...tuki, tuki, tuki...");
   };
 
@@ -125,6 +137,11 @@ export const WaitingRoom = ({ start }) => {
 
   return (
     <div>
+      <ButtonComponent
+        text="Repartir cartas"
+        onClick={() => startGame()}
+      ></ButtonComponent>
+
       {room && !inGame ? (
         <div>
           <div

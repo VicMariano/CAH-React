@@ -17,6 +17,7 @@ import {
 const firestore = getFirestore(firebaseApp);
 const blackCardsRef = collection(firestore, "black-cards");
 const whiteCardsRef = collection(firestore, "white-cards");
+const roundsRef = collection(firestore, "rooms", "2", "rounds");
 // USERS
 const usersRef = collection(firestore, "users");
 const userDocRef = (email) => doc(usersRef, email);
@@ -41,14 +42,14 @@ export const getAllWhiteCards = async () => {
 };
 
 // get a black card by id
-export const getWhiteCardById = async (id) => {
+export const getBlackCardById = async (id) => {
   const consulta = await getDoc(doc(whiteCardsRef, id));
   return consulta.exists()
     ? consulta.data()
     : console.error("No existe la carta solicitada");
 };
 // get a white card by id
-export const getBlackCardById = async (id) => {
+export const getWhiteCardById = async (id) => {
   const consulta = await getDoc(doc(whiteCardsRef, id));
   return consulta.exists()
     ? consulta.data()
@@ -182,12 +183,19 @@ const listenRoom = async (roomId, set) => {
   });
 };
 
+// get all rounds
+const getRounds = async (roomId) => {
+  const querySnapshot = await getDocs(roundsRef);
+  console.log(querySnapshot?.docs?.map((doc) => doc.data() || []));
+  return querySnapshot?.docs?.map((doc) => doc.data() || []);
+};
+
+// creates a new round inside the rounds subcollection. If the subcollection doesn't exist yet, it'll be created
 const createRound = async (roomId, roundNumber, roundContent) => {
-  // creates a new round inside the rounds subcollection. If the subcollection doesn't exist yet, it'll be created
   const docRef = doc(rooms, roomId, "rounds", roundNumber);
   await setDoc(docRef, roundContent);
   const consulta = await getDoc(docRef);
-  if (consulta.exists) {
+  if (consulta.exists()) {
     console.log(consulta.data());
     return consulta.data();
   }
@@ -205,6 +213,7 @@ export default {
   findRoom,
   addUserToRoom,
   listenRoom,
+  getRounds,
   createRound,
 };
 
