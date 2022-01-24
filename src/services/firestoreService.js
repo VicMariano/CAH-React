@@ -182,6 +182,17 @@ const listenRoom = async (roomId, set) => {
   });
 };
 
+const createRound = async (roomId, roundNumber, roundContent) => {
+  // creates a new round inside the rounds subcollection. If the subcollection doesn't exist yet, it'll be created
+  const docRef = doc(rooms, roomId, "rounds", roundNumber);
+  await setDoc(docRef, roundContent);
+  const consulta = await getDoc(docRef);
+  if (consulta.exists) {
+    console.log(consulta.data());
+    return consulta.data();
+  }
+};
+
 export default {
   getAllBlackCards,
   getAllWhiteCards,
@@ -194,6 +205,7 @@ export default {
   findRoom,
   addUserToRoom,
   listenRoom,
+  createRound,
 };
 
 // old way updating to add new white card

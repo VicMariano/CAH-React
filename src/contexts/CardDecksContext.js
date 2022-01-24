@@ -6,6 +6,8 @@ export const CardDeckContext = createContext([]);
 const CardDecksProvider = (props) => {
   const [whiteDeck, setWhiteDeck] = useState(null);
   const [blackDeck, setBlackDeck] = useState(null);
+  const [whiteDeckInGame, setWhiteDeckInGame] = useState(null);
+  const [blackDeckInGame, setBlackDeckInGame] = useState(null);
 
   // gets all white cards from db
   const fetchWhiteDeck = async () => {
@@ -40,6 +42,10 @@ const CardDecksProvider = (props) => {
         setWhiteDeck,
         blackDeck,
         setBlackDeck,
+        whiteDeckInGame,
+        setWhiteDeckInGame,
+        blackDeckInGame,
+        setBlackDeckInGame,
       }}
     >
       {props.children}
