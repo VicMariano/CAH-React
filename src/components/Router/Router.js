@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import { Routes, Navigate, Route } from "react-router";
 import "../../App.css";
 import AddCardPage from "../../routes/addCardPage";
@@ -17,7 +17,7 @@ export default function Router() {
   return (
     <div className="App">
       <AuthProvider>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Navbar />
             <Routes>
@@ -49,7 +49,7 @@ export default function Router() {
               <Route path="/login" element={<Login />} />
             </Routes>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
     </div>
   );
