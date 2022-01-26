@@ -22,7 +22,7 @@ export default function Router() {
             <Navbar />
             <Routes>
               <Route
-                path="/"
+                path="CAH-React/"
                 element={
                   <Private>
                     <Home />
@@ -31,7 +31,7 @@ export default function Router() {
               />
 
               <Route
-                path="/collectionPage"
+                path="CAH-React/collectionPage"
                 element={
                   <Private>
                     <CollectionPage />
@@ -39,14 +39,14 @@ export default function Router() {
                 }
               />
               <Route
-                path="/addCardPage"
+                path="CAH-React/addCardPage"
                 element={
                   <Private>
                     <AddCardPage />
                   </Private>
                 }
               />
-              <Route path="/login" element={<Login />} />
+              <Route path="CAH-React/login" element={<Login />} />
             </Routes>
           </div>
         </HashRouter>
