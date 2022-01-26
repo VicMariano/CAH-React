@@ -1,13 +1,18 @@
 import "./App.css";
-import AuthProvider from "./contexts/AuthContext";
-
-import Router from "./components/Router/Router";
+import AuthProvider, { useAuth } from "./contexts/AuthContext";
+import { useState } from "react/cjs/react.development";
+import Login from "components/Login/Login";
+import Navbar from "components/Navbar/Navbar";
+import Main from "./components/Main/Main";
+import RedirectProvider from "contexts/RedirectContext";
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
-        <Router></Router>
+        <RedirectProvider>
+          <Main />
+        </RedirectProvider>
       </AuthProvider>
     </div>
   );

@@ -24,6 +24,20 @@ export const NavLink = styled(Link)`
     color: #15cdfc;
   }
 `;
+export const NavButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  &.active {
+    color: #15cdfc;
+  }
+`;
 
 export const NavMenu = styled.div`
   display: flex;
