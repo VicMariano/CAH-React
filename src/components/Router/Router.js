@@ -23,7 +23,8 @@ export default function Router() {
             <Routes>
               <Route
                 path="CAH-React/"
-                element={
+                exact
+                component={
                   <Private>
                     <Home />
                   </Private>
@@ -32,7 +33,8 @@ export default function Router() {
 
               <Route
                 path="CAH-React/collectionPage"
-                element={
+                exact
+                component={
                   <Private>
                     <CollectionPage />
                   </Private>
@@ -40,13 +42,14 @@ export default function Router() {
               />
               <Route
                 path="CAH-React/addCardPage"
-                element={
+                exact
+                component={
                   <Private>
                     <AddCardPage />
                   </Private>
                 }
               />
-              <Route path="CAH-React/login" element={<Login />} />
+              <Route path="CAH-React/login" exact component={<Login />} />
             </Routes>
           </div>
         </HashRouter>
