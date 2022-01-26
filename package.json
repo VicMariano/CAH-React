@@ -25,9 +25,9 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "live -d docs",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --globals react=React",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "db:mock": "json-server --watch src/helpers/data.json --port 3001"
