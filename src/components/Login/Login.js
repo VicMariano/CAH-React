@@ -6,13 +6,13 @@ import {
 } from "firebase/auth";
 import useInput from "../customHooks/useInput";
 import ButtonComponent from "../Button/ButtonComponent";
+import { useNavigate } from "react-router";
 import { useAuth } from "contexts/AuthContext";
 import { Api } from "services/api";
 import { updateName } from "services/firebaseAuth";
 import firebaseApp from "services/firebaseCredentials";
 import { Loading } from "components/Loading/Loading";
 import { useEffect } from "react/cjs/react.development";
-import { useRedirect } from "contexts/RedirectContext";
 const auth = getAuth(firebaseApp);
 
 export default function Login() {
@@ -22,13 +22,10 @@ export default function Login() {
   const [email, bindEmail, clearEmail] = useInput("");
   const [pass, bindPass, clearPass] = useInput("");
   const user = auth.currentUser;
-  const { setUser } = useAuth();
-  const { setPage } = useRedirect();
+  const navigate = useNavigate();
 
-  const redirectToHome = () => {
-    console.log("Redirecting home from login");
-    setPage(0);
-  };
+  const { setUser } = useAuth();
+
   const changeSignMethod = () => {
     setIsRegistering(!isRegistering);
   };
@@ -47,7 +44,7 @@ export default function Login() {
         const resUserAdded = await Api.addNewUser(user);
         resUserAdded && (await updateName(name));
         setUser(user);
-        redirectToHome();
+        navigate("/");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -65,7 +62,7 @@ export default function Login() {
         const user = userCredential.user;
         console.log("From login: ", userCredential, user);
         setUser(user);
-        redirectToHome();
+        navigate("/");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -78,16 +75,12 @@ export default function Login() {
     setTimeout(() => {
       setLoading(false);
     }, 1500);
-    return () => {
-      console.log("unmounting Login");
-    };
+    return () => {};
   }, []);
 
   useEffect(() => {
-    user && redirectToHome();
-    return () => {
-      console.log("unmounting Login");
-    };
+    user && navigate("/");
+    return () => {};
   }, [user]);
 
   return (
