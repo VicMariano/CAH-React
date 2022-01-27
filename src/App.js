@@ -1,6 +1,6 @@
 import "./App.css";
 import AuthProvider, { useAuth } from "./contexts/AuthContext";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import Login from "components/Login/Login";
 import Navbar from "components/Navbar/Navbar";
 import Main from "./components/Main/Main";

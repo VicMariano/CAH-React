@@ -2,7 +2,7 @@ import Login from "components/Login/Login";
 import Navbar from "components/Navbar/Navbar";
 import { useAuth } from "contexts/AuthContext";
 import { useRedirect } from "contexts/RedirectContext";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import AddCardPage from "routes/addCardPage";
 import CollectionPage from "routes/collectionPage";
 import Home from "routes/home";
