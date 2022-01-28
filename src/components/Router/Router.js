@@ -14,10 +14,11 @@ const Private = (props) => {
 };
 
 export default function Router() {
+  console.log(process.env.PUBLIC_URL);
   return (
     <div className="App">
       <AuthProvider>
-        <HashRouter basename="http://vicmariano.github.io/CAH-React/">
+        <HashRouter basename={process.env.PUBLIC_URL}>
           <div>
             <Navbar />
             <Routes>
