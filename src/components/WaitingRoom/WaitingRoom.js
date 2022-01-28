@@ -5,7 +5,7 @@ import Room from "components/Room/Room";
 import { useDecksContext } from "contexts/CardDecksContext";
 import { useRoomContext } from "contexts/RoomContext";
 import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { Api } from "services/api";
 import firebaseApp from "services/firebaseCredentials";
 const auth = getAuth(firebaseApp);
