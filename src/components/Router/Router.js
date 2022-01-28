@@ -18,7 +18,7 @@ export default function Router() {
   return (
     <div className="App">
       <AuthProvider>
-        <HashRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter basename="/">
           <div>
             <Navbar />
             <Routes>
