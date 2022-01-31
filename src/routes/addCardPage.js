@@ -1,5 +1,5 @@
 import ButtonComponent from "components/Button/ButtonComponent";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import AddCard from "../components/AddCard/AddCard";
 
 export default function AddCardPage() {
