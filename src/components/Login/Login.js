@@ -13,7 +13,7 @@ import { Api } from "services/api";
 import { updateName } from "services/firebaseAuth";
 import firebaseApp from "services/firebaseCredentials";
 import { Loading } from "components/Loading/Loading";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 const auth = getAuth(firebaseApp);
 
 export default function Login() {
