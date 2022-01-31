@@ -6,7 +6,8 @@ import {
 } from "firebase/auth";
 import useInput from "../customHooks/useInput";
 import ButtonComponent from "../Button/ButtonComponent";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "contexts/AuthContext";
 import { Api } from "services/api";
 import { updateName } from "services/firebaseAuth";
@@ -22,7 +23,7 @@ export default function Login() {
   const [email, bindEmail, clearEmail] = useInput("");
   const [pass, bindPass, clearPass] = useInput("");
   const user = auth.currentUser;
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const { setUser } = useAuth();
 
@@ -44,7 +45,7 @@ export default function Login() {
         const resUserAdded = await Api.addNewUser(user);
         resUserAdded && (await updateName(name));
         setUser(user);
-        navigate("/");
+        history.push("/");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -62,7 +63,7 @@ export default function Login() {
         const user = userCredential.user;
         console.log("From login: ", userCredential, user);
         setUser(user);
-        navigate("/");
+        history.push("/");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -79,7 +80,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    user && navigate("/");
+    user && history.push("/");
     return () => {};
   }, [user]);
 

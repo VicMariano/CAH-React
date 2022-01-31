@@ -1,5 +1,10 @@
-import { BrowserRouter, HashRouter } from "react-router-dom";
-import { Routes, Navigate, Route } from "react-router";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+// import { Routes, Navigate, Route } from "react-router";
 import "../../App.css";
 import AddCardPage from "../../routes/addCardPage";
 import CollectionPage from "../../routes/collectionPage";
@@ -10,15 +15,14 @@ import AuthProvider, { useAuth } from "contexts/AuthContext";
 
 const Private = (props) => {
   const { user } = useAuth();
-  return user ? props.children : <Navigate to="/login" />;
+  return user ? props.children : <Redirect to="/login" />;
 };
 
-export default function Router() {
+export default function RouterComponent() {
   console.log(process.env.PUBLIC_URL);
   return (
-    <div className="App">
-      <AuthProvider>
-        <HashRouter basename="/">
+    <>
+      {/* <HashRouter basename="/">
           <div>
             <Navbar />
             <Routes>
@@ -50,8 +54,18 @@ export default function Router() {
               <Route path="/login" element={<Login />} />
             </Routes>
           </div>
-        </HashRouter>
-      </AuthProvider>
-    </div>
+        </HashRouter> */}
+
+      <Router basename="/CAH-React">
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+
+          <Route path="/collectionPage" component={CollectionPage} />
+          <Route path="/addCardPage" component={AddCardPage} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Router>
+    </>
   );
 }
