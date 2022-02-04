@@ -13,9 +13,18 @@ import Navbar from "../Navbar/Navbar";
 import Login from "../Login/Login";
 import AuthProvider, { useAuth } from "contexts/AuthContext";
 
-const Private = (props) => {
+// const Private = (props) => {
+//   const { user } = useAuth();
+//   return user ? props.children : <Redirect to="/login" />;
+// };
+
+const PrivateRoute = ({ component, ...options }) => {
   const { user } = useAuth();
-  return user ? props.children : <Redirect to="/login" />;
+  const finalComponent = user ? component : Login;
+  console.log("Component ", component);
+  console.log("Options ", options);
+  console.log("PrivateRoute ", finalComponent);
+  return <Route {...options} component={finalComponent} />;
 };
 
 export default function RouterComponent() {
@@ -59,10 +68,22 @@ export default function RouterComponent() {
       <Router basename="/CAH-React">
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={<Private>{Home}</Private>} />
 
-          <Route path="/collectionPage" component={CollectionPage} />
-          <Route path="/addCardPage" component={AddCardPage} />
+          <Route
+            path="/collectionPage"
+            component={<Private>{CollectionPage}</Private>}
+          />
+          <Route
+            path="/addCardPage"
+            component={<Private>{AddCardPage}</Private>}
+          /> */}
+
+          {/* <Redirect from="/" to="/home" /> */}
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/addCardPage" component={AddCardPage} />
+          <PrivateRoute path="/collectionPage" component={CollectionPage} />
+
           <Route path="/login" component={Login} />
         </Switch>
       </Router>

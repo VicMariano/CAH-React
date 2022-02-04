@@ -45,7 +45,7 @@ export default function Login() {
         const resUserAdded = await Api.addNewUser(user);
         resUserAdded && (await updateName(name));
         setUser(user);
-        history.push("/");
+        history.push("/home");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -63,7 +63,7 @@ export default function Login() {
         const user = userCredential.user;
         console.log("From login: ", userCredential, user);
         setUser(user);
-        history.push("/");
+        history.push("/home");
       } catch (error) {
         alert(error.code, error.message);
         const errorCode = error.code;
@@ -80,7 +80,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    user && history.push("/");
+    user && history.push("/home");
     return () => {};
   }, [user]);
 

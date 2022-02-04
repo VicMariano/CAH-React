@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <>
       <Nav className="navbar">
-        <NavLink to="/"> CAH</NavLink>
+        <NavLink to="/home"> CAH</NavLink>
         <div className="nav-menu">
           {auth.currentUser && (
             <NavLink to="/addCardPage">Agregar carta</NavLink>
@@ -21,7 +21,7 @@ export default function Navbar() {
             <NavLink to="/collectionPage">Colección</NavLink>
           )}
           {auth.currentUser && (
-            <NavLink to="/" onClick={() => signOut(auth)}>
+            <NavLink to="/home" onClick={() => signOut(auth)}>
               Cerrar Sesión
             </NavLink>
           )}
